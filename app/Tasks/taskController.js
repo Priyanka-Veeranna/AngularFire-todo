@@ -19,7 +19,7 @@ angular.module('toDoFire')
     }
 
     var self = this, userData = loggedIn;
-    self.newTask='';
+    self.newTask='', self.error;
     var uId = userData.uid;
 
     // Reference for the '/tasks' json tree in firebase database
@@ -39,10 +39,17 @@ angular.module('toDoFire')
     // function to add new tasks for the user
     self.addTask = function(){
 
+      //Check if the task field is empty
+      if(!self.newTask) {
+        self.error = "Please enter what you want ToDO";
+        return;
+      }
+
       self.taskList.$add(self.newTask).then(function(){
 
         // clear the input field
         self.newTask='';
+        self.error = '';
       })
       .catch(function(error){
         console.log(error);
