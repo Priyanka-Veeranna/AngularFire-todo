@@ -6,6 +6,13 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+
+  /*Background-size fix for IE8+ */
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+  src='../images/bg1.jpg', sizingMethod='scale');
+
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+  src='../images/bg1.jpg', sizingMethod='scale')";
 }
 
 .title{
