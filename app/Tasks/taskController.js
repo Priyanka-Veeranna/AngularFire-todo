@@ -48,7 +48,7 @@ angular.module('toDoFire')
       self.taskList.$add(self.newTask).then(function(){
 
         // clear the input field
-        self.newTask='';
+        self.newTask = '';
         self.error = '';
       })
       .catch(function(error){
