@@ -4,3 +4,6 @@ dist
 .sass-cache
 bower_components
 tests
+.firebaserc
+database.rules.json
+firebase.json
