@@ -7,39 +7,55 @@
 
   <div class="row">
     <div class="col-md-6">
-          <h3 class="listTitle"> To Do | </h3>
-          <a class="glyphicon glyphicon-refresh" ng-click="task.reset(task.taskList)">
+          <h3 class="listTitle"> To Do </h3>
+          | <a href="" ng-click="task.reset(task.taskList)">reset</a>
+          | <a href="" ng-click="task.archive()"> archive </a>
 
-          </a>
-          <ul id="taskList">
+          <ul id="taskList" todo-Drop drop="task.addTask(item)">
             <li ng-repeat="item in task.taskList"  id="{{item.$id}}" todo-Drag>
               <!-- <input type="checkbox" ng-click="task.done(item)"> -->
               {{ item.$value }}
             </li>
           </ul>
+
+
     </div>
 
     <div class="col-md-6">
-      <h3 class="listTitle"> Done | </h3>
-      <a class="glyphicon glyphicon-refresh" alt="reset" ng-click="task.reset(task.doneList)"> </a>
+      <h3 class="listTitle"> Done </h3>
+      | <a href="" alt="reset" ng-click="task.reset(task.doneList)"> reset </a>
+
       <ul id="doneList" todo-Drop drop="task.done(item)">
         <li ng-repeat="item in task.doneList">
           {{ item.$value }}
         </li>
       </ul>
-
-      <!-- <button id="doneReset" ng-click="task.reset()" class="btn btn-primary"> reset </button> -->
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-7 col-md-offset-2">
+    <div class="col-md-5">
       <form>
-          <label for="task"> Add a new Task </label>
-          <input type="text" name="task" ng-model="task.newTask" placeholder="Add a task">
+          <input type="text" name="task" ng-model="task.newTask" placeholder="Add a new task">
           <button class="btn btn-primary" ng-click="task.addTask()"> Add </button>
       </form>
       <div ng-show="task.error"> {{ task.error }} </div>
+    </div>
+
+    <div class="col-md-7">
+      <button class="btn btn-primary center-block" ng-hide="task.showArch" ng-click="task.showArch=true"> Show Archived task Lists </button>
+
+      <section  ng-show="task.showArch">
+        <h4 class="text-center"> Archived ToDos </h4>
+        <ul id="archList">
+          <h2 ng-if="task.archivedList.length ==0"> No archived ToDo's. </h2>
+          <li ng-repeat="item in task.archivedList" id="{{item.$value}}" todo-Drag>
+            {{ item.$value }}
+            <a href="" class="glyphicon glyphicon-remove pull-right" ng-click="task.remArch(item)"></a>
+          </li>
+        </ul>
+      </section>
+
     </div>
   </div>
 

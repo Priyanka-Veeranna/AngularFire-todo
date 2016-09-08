@@ -18,7 +18,7 @@ angular.module('toDoFire')
       return;
     }
 
-    var self = this, userData = loggedIn;
+    var self = this, userData = loggedIn, showArch = false;
     self.newTask='', self.error;
     var uId = userData.uid;
 
@@ -29,6 +29,9 @@ angular.module('toDoFire')
     var refOne = firebase.database().ref('users/' + uId + '/done');
     self.doneList = $firebaseArray(refOne);
 
+    var archRef = firebase.database().ref('archives/' + uId );
+    self.archivedList = $firebaseArray(archRef);
+
     // LogOut function
     self.logout = function(){
         Auth.$signOut();
@@ -37,23 +40,32 @@ angular.module('toDoFire')
     };
 
     // function to add new tasks for the user
-    self.addTask = function(){
+    self.addTask = function(task){
 
-      //Check if the task field is empty
-      if(!self.newTask) {
-        self.error = "Please enter what you want ToDO";
-        return;
+      if(task){
+
+        self.taskList.$add(task).then(function(){
+          self.error = '';
+        });
       }
+      else{
 
-      self.taskList.$add(self.newTask).then(function(){
+        //Check if the add new task field is empty
+        if(!self.newTask) {
+          self.error = "Please enter what you want ToDO";
+          return;
+        }
+
+        self.taskList.$add(self.newTask).then(function(){
 
         // clear the input field
         self.newTask = '';
         self.error = '';
-      })
-      .catch(function(error){
-        console.log(error);
-      });
+        })
+        .catch(function(error){
+          console.log(error);
+        });
+      }
 
     };
 
@@ -69,6 +81,29 @@ angular.module('toDoFire')
         self.doneList.$add(record);
       }).
       catch(function(error) {
+        console.log(error);
+      });
+    };
+
+    // function to archive an existing tasks list
+    self.archive = function(){
+
+      if (!self.taskList)
+      {
+        self.error = "The task list is empty";
+        return;
+      }
+
+      for(var i =0; i< self.taskList.length; i++){
+        self.archivedList.$add(self.taskList[i]);
+      }
+    };
+
+    // function to remove taks from archived list
+    self.remArch = function(task){
+      
+      self.archivedList.$remove(task).
+      catch(function(error){
         console.log(error);
       });
     };

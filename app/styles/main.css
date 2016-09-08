@@ -27,48 +27,6 @@ body{
   padding-bottom: 30px;
 }
 
-[class^="tooltip"] {
-  position: relative;
-}
-[class^="tooltip"]:after {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  content: attr(data-tooltip);
-  padding: 6px 10px;
-  top: 1.4em;
-  left: 50%;
-  -webkit-transform: translateX(-50%) translateY(-2px);
-          transform: translateX(-50%) translateY(-2px);
-  background: grey;
-  color: white;
-  white-space: nowrap;
-  z-index: 2;
-  border-radius: 2px;
-  -webkit-transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), -webkit-transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
-  transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), -webkit-transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
-  transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
-  transition: opacity 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1), -webkit-transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
-}
-[class^="tooltip"]:hover:after {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  -webkit-transform: translateX(-50%) translateY(0);
-          transform: translateX(-50%) translateY(0);
-}
-
-.tooltip--right:after {
-  top: -4px;
-  left: 100%;
-  -webkit-transform: translateX(12%) translateY(0);
-          transform: translateX(12%) translateY(0);
-}
-.tooltip--right:hover:after {
-  -webkit-transform: translateX(10%) translateY(0);
-          transform: translateX(10%) translateY(0);
-}
-
 /* Specific Styles*/
 .main{
   margin-top: 5%;
@@ -94,12 +52,12 @@ body{
 h3.listTitle{
   display: inline-block;
 }
-#taskList, #doneList{
+#taskList, #doneList, #archList{
   min-height: 100px;
   border: 1px solid lightblue;
   padding:0px;
 }
-#taskList li, #doneList li{
+#taskList li, #doneList li, #archList li{
   list-style-type: none;
   /* border: 1px solid grey; */
   border-radius: 5px;
